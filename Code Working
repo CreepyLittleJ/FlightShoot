@@ -1,0 +1,44 @@
+//bulletshoot code   below
+
+void Update () {
+        transform.Translate(transform.up * shootspeed*Time.deltaTime,Space.World);
+        Text_Score.text = Score.ToString();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case"enemy":
+                collision.SendMessage("EDie");
+                AudioSource.PlayClipAtPoint(killaudio, transform.position);
+                Destroy(gameObject);
+                Score = Score + 1;
+                break;
+            case "Airplane":
+                break;
+            case "Airwall":
+                Destroy(gameObject);
+                break;
+            case "Jet":
+                
+                    collision.SendMessage("Jetlifecount");
+                    Destroy(gameObject);
+                    /*if (Jetlife == 0)
+                    {
+                        collision.SendMessage("JDie");
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                        Jetlife = Jetlife - 1;
+                    }*/
+                    Score = Score + 3;
+
+                
+                break;
+            default:
+                break;
+        }
+    }
