@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class randomborn : MonoBehaviour {
+
+    public GameObject enemy;
+    private float x;
+    private float y;
+    private float z;
+    private float timeval;
+    public AudioClip flyaudio;
+    public GameObject[] enemybornlist;
+    public GameObject back;
+
+    // Use this for initialization
+    void Start () {
+        AudioSource.PlayClipAtPoint(flyaudio, transform.position);
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        transform.position =new Vector3(0,0,-10);
+        if (timeval >= 1)
+        {
+            randomcreat();
+            map();
+            timeval = 0;
+        }
+        else
+        {
+            timeval += Time.deltaTime;
+        }
+        //R复位
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
+	}
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("play");
+    }
+
+    private void randomcreat()
+    {
+        x = Random.Range(-8, 8);
+           y = 5;
+        //    z = -10;
+        transform.position = new Vector3(x, y, z);
+        int num = Random.Range(0, 2);
+        Instantiate(enemybornlist[num], transform.position, Quaternion.identity);
+        /*while (true) {
+        Vector3 bornposition = new Vector3(Random.Range(-5,5), Random.Range(5,5), 0);
+            Instantiate(enemy, bornposition, Quaternion.identity);
+    }*/
+    }
+    //从天而降夏天俩字！表明夏天悄悄过去。
+    private void map()
+    {
+        x = Random.Range(-7, 7);
+        y = 5;
+      //      z = -10;
+        transform.position = new Vector3(x, y, z);
+        //int num = Random.Range(0, 2);
+        Instantiate(back, transform.position, Quaternion.identity);
+    }
+}
