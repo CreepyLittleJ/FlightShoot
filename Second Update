@@ -1,0 +1,35 @@
+//我们加上了清除墙，出生无敌，边界处理，受到攻击特效
+ void Jetlifecount()
+    {
+        if (Jetlife == 1)
+        {
+           // PlayerManager.Instance1.PlayerScore += 3;
+            JDie();
+        }
+        else
+        {
+          //  Destroy(gameObject);
+            Jetlife = Jetlife - 1;
+            Instantiate(Jetunderattack, transform.position, transform.rotation);
+            //在这里实例化受到攻击得特效
+
+        }
+    }
+    //清除墙的碰撞检测
+        private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Airwall":
+                Destroy(gameObject);
+                break;
+            case "enemy":
+                collision.SendMessage("EDie");
+                break;
+            case "Jet":
+                collision.SendMessage("JDie");
+                break;
+            default:
+                break;
+        }
+    }
