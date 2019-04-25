@@ -1,0 +1,31 @@
+//重生无敌时间
+//判断是否受保护，时间初始为3秒
+ if (Isdenfended == true)
+        {
+            DefendTimeval -= Time.deltaTime;
+            if (DefendTimeval <= 0)
+            {
+                Isdenfended = false;
+            }
+        }
+        
+        
+ //计分系统
+         PlayerManager.Instance1.PlayerScore++;
+         PlayerManager.Instance1.PlayerScore += 3;
+         //使用了一个单例方法，分别在敌机死亡方法里调用计分。
+         
+         
+ //技能CD
+ //加入了清除墙的CD
+ //并且捡到道具包使能量条增加，满格可释放清除墙。
+     public void AbilityPower()
+    {
+        ValueS.value += 1;
+    }
+    public void Cls()
+    {
+        ValueS.value = 0;
+    }
+    //两个方法让能量条增加或者清零，在清除墙脚本里调用清零方法，即可。
+    
